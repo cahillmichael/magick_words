@@ -156,6 +156,10 @@ function generatePassword() {
       charArray.push(specCharString.split(''));
       console.log('add lc ' + charArray);
     };
+    if(charArray.length === 0){
+      window.alert('Select at least one class of characters.');
+      generatePassword();
+    };
   };
 
 getLength();
