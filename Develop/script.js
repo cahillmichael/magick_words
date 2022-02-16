@@ -7,12 +7,13 @@ function generatePassword() {
   var pwUpperCase;
   var pwNumerals;
   var pwSpecial;
+  var charString = '';
   var charArray = [];
   var lcString = 'zyxwvutsrqponmlkjihgfedcba';
   var ucString = 'ZYXWVUTSRQPONMLKJIHGFEDCBA';
   var numString = '0987654321';
   var specCharString = " !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-  console.log(specCharString);
+  var newPassword = '';
 
   //obtain string length from user
   var getLength = function() {
@@ -141,25 +142,43 @@ function generatePassword() {
   //build array of acceptable characters
   var buildCharArray = function() {
     if(pwLowerCase === 'Y'){
-      charArray.push(lcString.split(''));
-      console.log('add lc ' + charArray);
+      charString += lcString;
+      console.log('add lc ' + charString);
     };
     if(pwUpperCase === 'Y'){
-      charArray.push(ucString.split(''));
-      console.log('add uc ' + charArray);
+      charString += ucString;
+      console.log('add uc ' + charString);
     };
     if(pwNumerals === 'Y'){
-      charArray.push(numString.split(''));
-      console.log('add lc ' + charArray);
+      charString += numString;
+      console.log('add num ' + charString);
     };
     if(pwSpecial === 'Y'){
-      charArray.push(specCharString.split(''));
-      console.log('add lc ' + charArray);
+      charString += specCharString;
+      console.log('add spec ' + charString);
     };
-    if(charArray.length === 0){
+    if(charString.length === 0){
       window.alert('Select at least one class of characters.');
       generatePassword();
     };
+    charArray = charString.split('');
+  };
+
+  //random number generator function
+  var randomNumber = function(max) {
+    var value = Math.floor(Math.random() * max);
+    return value;
+  };
+
+  //construct password from array of acceptable characters
+  var pwConstruct = function() {
+    arrLength = charArray.length;
+    for (let i = 0; i < pwLength; i++) {
+      let char = charArray[randomNumber(charArray.length)];
+      console.log(char);
+      newPassword += char;
+    };
+    console.log('after for loop ' + newPassword);
   };
 
 getLength();
@@ -174,7 +193,10 @@ getSpecial();
 console.log('Spec output ' + pwSpecial);
 buildCharArray();
 console.log('result array ' + charArray)
+pwConstruct();
+console.log('result pw ' + newPassword);
 
+return newPassword;
 };
 
 // Get references to the #generate element
