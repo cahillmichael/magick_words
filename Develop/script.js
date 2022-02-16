@@ -7,7 +7,7 @@ function generatePassword() {
   var pwUpperCase;
   var pwNumerals;
   var pwSpecial;
-  var charArray;
+  var charArray = [];
   var lcString = 'zyxwvutsrqponmlkjihgfedcba';
   var ucString = 'ZYXWVUTSRQPONMLKJIHGFEDCBA';
   var numString = '0987654321';
@@ -138,6 +138,26 @@ function generatePassword() {
     };
   };
 
+  //build array of acceptable characters
+  var buildCharArray = function() {
+    if(pwLowerCase === 'Y'){
+      charArray.push(lcString.split(''));
+      console.log('add lc ' + charArray);
+    };
+    if(pwUpperCase === 'Y'){
+      charArray.push(ucString.split(''));
+      console.log('add uc ' + charArray);
+    };
+    if(pwNumerals === 'Y'){
+      charArray.push(numString.split(''));
+      console.log('add lc ' + charArray);
+    };
+    if(pwSpecial === 'Y'){
+      charArray.push(specCharString.split(''));
+      console.log('add lc ' + charArray);
+    };
+  };
+
 getLength();
 console.log('length output ' + pwLength);
 getLowercase();
@@ -148,7 +168,8 @@ getNumerals();
 console.log('Num output ' + pwNumerals);
 getSpecial();
 console.log('Spec output ' + pwSpecial);
-
+buildCharArray();
+console.log('result array ' + charArray)
 
 };
 
